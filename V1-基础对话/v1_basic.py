@@ -5,9 +5,9 @@ import os
 from openai import OpenAI
 
 # 从环境变量读取 API key
-api_key = os.getenv("DASHSCOPE_API_KEY")
+api_key = os.getenv("AGENT_API_KEY")
 if not api_key:
-    raise RuntimeError("请先设置 DASHSCOPE_API_KEY")
+    raise RuntimeError("请先设置 api_key")
 
 client = OpenAI(
     api_key=api_key,
