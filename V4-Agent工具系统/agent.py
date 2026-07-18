@@ -11,6 +11,32 @@ MagicCode Agent
 4. Tool Calling
 
 UI、聊天历史、公共工具均交由其它模块负责。
+
+
+`while True` 循环: 一个用户请求可以触发十几次工具调用，每一次都基于上一次的结果做出决策。eg:
+        用户："给 main.py 加上错误处理"
+
+        第 1 轮：
+          AI："让我先看看项目结构。"
+          工具：list_files(".")、read_file("main.py")
+          → 执行，发回结果
+
+        第 2 轮：
+          AI："看到问题了，我来加 try-except..."
+          工具：edit_file("main.py", old_text, new_text)
+          → 执行，发回结果
+
+        第 3 轮：
+          AI："改好了，跑下测试验证一下。"
+          工具：run_command("python -m pytest")
+          → 执行，发回结果
+
+        第 4 轮：
+          AI："全部测试通过。以下是我做的修改..."
+          工具：无 → 循环退出
+
+AI 计划、行动、观察、调整——全程自主。这就是"Agentic"的含义。
+
 """
 
 import json
